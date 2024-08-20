@@ -209,13 +209,17 @@ CREATE TABLE `estado_paciente` (
     `Id_PK` int(11) NOT NULL AUTO_INCREMENT,
     `Id_FK_Paciente` int(11) NOT NULL, -- Este es el Id del paciente
     `Id_FK_Hospital` int(11) NOT NULL, -- Este es el Id del hospital
+    `Id_FK_Especialista` int(11) NOT NULL, -- Este es el Id del especialista
     `Tipo_Consulta_Asignado` ENUM('Pediatría', 'CGI', 'Urgencia') NOT NULL,
     `Prioridad` TINYINT UNSIGNED NOT NULL,
     `Numero_Atencion` TINYINT UNSIGNED NOT NULL,
     `Estado_Consulta` ENUM('En Espera', 'En Consulta', 'Libre') NOT NULL,
+    `fecha_ingreso_consulta` DATE NOT NULL DEFAULT CURRENT_DATE, -- Fecha automática
+    `hora_ingreso_consulta` TIME NOT NULL DEFAULT CURRENT_TIME, -- Hora automática
     PRIMARY KEY (`Id_PK`),
     FOREIGN KEY (`Id_FK_Paciente`) REFERENCES `patients`(`id`),
-    FOREIGN KEY (`Id_FK_Hospital`) REFERENCES `hospital`(`Id_PK_Hospital`)
+    FOREIGN KEY (`Id_FK_Hospital`) REFERENCES `hospital`(`Id_PK_Hospital`),
+    FOREIGN KEY (`Id_FK_Especialista`) REFERENCES `especialista`(`Id_PK_Especialista`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -356,3 +360,22 @@ VALUES
 (3, 'Claudia Pediatra', 'Pediatría'),
 (3, 'Cristian Urgencias', 'Urgencia'),
 (3, 'Catalina CGI', 'CGI');
+
+
+-- Para los especialistas del Hospital A (Hospital 1)
+INSERT INTO `estado_especialista` (`Id_FK_Especialista`, `Estado_Consulta`)
+SELECT `Id_PK_Especialista`, 'Desocupado'
+FROM `especialista`
+WHERE `Id_FK_Hospital` = 1;
+
+-- Para los especialistas del Hospital B (Hospital 2)
+INSERT INTO `estado_especialista` (`Id_FK_Especialista`, `Estado_Consulta`)
+SELECT `Id_PK_Especialista`, 'Desocupado'
+FROM `especialista`
+WHERE `Id_FK_Hospital` = 2;
+
+-- Para los especialistas del Hospital C (Hospital 3)
+INSERT INTO `estado_especialista` (`Id_FK_Especialista`, `Estado_Consulta`)
+SELECT `Id_PK_Especialista`, 'Desocupado'
+FROM `especialista`
+WHERE `Id_FK_Hospital` = 3;
