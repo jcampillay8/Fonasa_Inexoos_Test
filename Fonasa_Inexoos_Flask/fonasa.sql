@@ -145,8 +145,8 @@ CREATE TABLE `estado_paciente` (
     `Prioridad` TINYINT UNSIGNED NOT NULL,
     `Numero_Atencion` TINYINT UNSIGNED NOT NULL,
     `Estado_Consulta` ENUM('En Espera', 'En Consulta', 'Libre') NOT NULL,
-    `fecha_ingreso_consulta` DATE NOT NULL DEFAULT CURRENT_DATE, -- Fecha automática
-    `hora_ingreso_consulta` TIME NOT NULL DEFAULT CURRENT_TIME, -- Hora automática
+    `fecha_ingreso_consulta` DATETIME NOT NULL DEFAULT NOW(), -- Fecha y hora automáticas
+    `hora_ingreso_consulta` TIME GENERATED ALWAYS AS (CAST(`fecha_ingreso_consulta` AS TIME)), -- Extraer hora de la fecha
     PRIMARY KEY (`Id_PK`),
     FOREIGN KEY (`Id_FK_Paciente`) REFERENCES `patients`(`id`),
     FOREIGN KEY (`Id_FK_Hospital`) REFERENCES `hospital`(`Id_PK_Hospital`),
