@@ -1,0 +1,59 @@
+version: '3'
+services:
+  app_service:
+    build: ./Fonasa_Inexoos_Flask
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./Fonasa_Inexoos_Flask/.env  # Indicar el archivo .env
+    command: flask run --host=0.0.0.0 --port=5000
+    depends_on:
+      - db
+
+  solicitar_consulta_service:
+    build: ./Fonasa_Inexoos_Flask
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./Fonasa_Inexoos_Flask/.env
+    command: flask run --host=0.0.0.0 --port=5001
+    depends_on:
+      - db
+
+  lista_espera_service:
+    build: ./Fonasa_Inexoos_Flask
+    ports:
+      - "5002:5002"
+    env_file:
+      - ./Fonasa_Inexoos_Flask/.env
+    command: flask run --host=0.0.0.0 --port=5002
+    depends_on:
+      - db
+
+  estadistica_service:
+    build: ./Fonasa_Inexoos_Flask
+    ports:
+      - "5003:5003"
+    env_file:
+      - ./Fonasa_Inexoos_Flask/.env
+    command: flask run --host=0.0.0.0 --port=5003
+    depends_on:
+      - db
+
+  frontend:
+    build: ./fonasa_inexoos_vue
+    ports:
+      - "8080:80"
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: BTC.100K.jc
+      MYSQL_DATABASE: Fonasa_Test
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:

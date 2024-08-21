@@ -11,6 +11,8 @@ import json
 app = Flask(__name__)
 CORS(app)
 
+load_dotenv(dotenv_path='./Fonasa_Inexoos_Flask/.env')  # Ruta al archivo .env
+
 # Configurar la base de datos con las variables de entorno
 app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST')
 app.config['MYSQL_USER'] = os.getenv('MYSQL_USER')

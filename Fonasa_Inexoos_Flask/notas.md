@@ -137,10 +137,10 @@ SELECT
         WHEN a.dieta_asignada = 1 AND p.edad_paciente >= 60 
         THEN (p.edad_paciente / 20) + 4
         ELSE (p.edad_paciente / 30) + 3
-    END AS resultado_calculo,
+    END AS factor_edad,
 
     -- Columna 2: Cálculo de (edad_paciente/100) + 5.3
-    (p.edad_paciente / 100) + 5.3 AS factor_riesgo,
+    (p.edad_paciente / 100) + 5.3 AS riesgo_edad,
 
     -- Columna 3: Suma de las dos columnas anteriores como "Prioridad"
     CASE
@@ -151,3 +151,61 @@ SELECT
 FROM patients p
 JOIN anciano a ON p.id = a.Id_FK  -- Relacionar anciano con patients
 WHERE p.grupo_edad = 'anciano';
+
+
+
+
+
+SELECT Id_FK_Paciente, Tipo_Consulta_Asignado, Prioridad, Estado_Consulta, Numero_Atencion, fecha_ingreso_consulta
+FROM `estado_paciente`;
+
+
+SELECT Id_PK_Especialista,Nombre_especialista, Especialidad_consulta 
+FROM especialista;
+
+SELECT Nombre_Hospital from hospital;
+
+
+
+
+
+
+
+excelente chat, ahora lo que requiero es que me ayudes con la siguiente etapa del proyecto en el cual pasamos a usar dos archivos nuevos que son los siguientes
+
+Fonasa_Inexoos_Flask/lista_espera.py
+fonasa_inexoos_vue/src/views/ListaEsperaView.vue
+
+el archivo python debe contener un 
+
+
+
+
+
+
+
+
+├── docker-compose.yml
+├── Fonasa_Inexoos_Flask (Backend)
+│   ├── app.py
+│   ├── data.csv
+│   ├── Dockerfile
+│   ├── env
+│   ├── estadistica.py
+│   ├── fonasa_data.sql
+│   ├── fonasa.sql
+│   ├── lista_espera.py
+│   ├── patient_resource.py
+│   ├── requirements.txt
+│   └── solicitar_consulta.py
+└── fonasa_inexoos_vue (Frontend)
+    ├── babel.config.js
+    ├── Dockerfile
+    ├── jsconfig.json
+    ├── node_modules
+    ├── package.json
+    ├── package-lock.json
+    ├── public
+    ├── README.md
+    ├── src
+    └── vue.config.js
