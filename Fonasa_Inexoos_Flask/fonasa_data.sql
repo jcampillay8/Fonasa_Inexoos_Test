@@ -157,11 +157,3 @@ FROM `especialista`
 WHERE `Id_FK_Hospital` = 3;
 
 
--- Insertar datos para tabla estado paciente
-INSERT INTO estado_paciente (Id_PK, Id_FK_Paciente, Tipo_Consulta_Asignado, Prioridad, Numero_Atencion, Estado_Consulta, fecha_ingreso_consulta, hora_ingreso_consulta, Id_FK_Hospital, Id_FK_Especialista) 
-VALUES
-(1, 55, 'Pediatría', 3, 1, 'Libre', '2024-08-20', '12:23:45', 1, 1),
-(2, 57, 'Urgencia', 13, 1, 'En Espera', '2024-08-20', '13:16:28', 3, 17),
-(3, 62, 'CGI', 3, 1, 'En Consulta', '2024-08-20', '13:32:01', 2, 9),
-(4, 58, 'Urgencia', 5, 1, 'En Espera', '2024-08-20', '13:36:52', 2, 8),
-(5, 63, 'Urgencia', 14, 1, 'Libre', '2024-08-20', '14:47:06', 3, 17);
